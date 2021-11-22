@@ -1,0 +1,39 @@
+.meter-input-root{
+    padding: 18px;
+    /* margin-top: 180px; */
+    margin-bottom:30px ;
+    
+}
+.form-error{
+    color: red;
+}
+.meter-input-div{
+    display: flex; 
+    justify-content:space-around;
+   
+}
+.every-field{
+    margin: 3px;
+}
+
+.to-take-table{
+    padding-top: 110px;
+    padding-left: 700px;
+}
+.addButt{
+   margin: 110px;
+   margin-left: 150px;
+    display: flex;
+}
+.addButt>span>i{
+  font-size: 100px;
+  padding: 5px;
+  color: rgb(161, 154, 154);
+}
+.addButt>span>p{
+font-size: 17px;
+padding-left: 12px;
+}
+.addButt>span>i:hover{
+  color: red;
+}

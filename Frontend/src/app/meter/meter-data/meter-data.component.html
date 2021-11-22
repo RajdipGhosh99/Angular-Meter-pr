@@ -1,0 +1,154 @@
+
+    
+    <div class="tableM">
+    
+        <table class="table table-striped ">
+            <thead>
+                <tr class="text-center">
+                    <th scope="col">No</th>
+                    <th scope="col">Meter Name</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Time(24-Hr Format)</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="text-center" *ngFor='let reading of meterReadings;index as i'>
+                    <!-- <th scope="row">1</th> -->
+                    <td>{{i+1}}</td>
+                    <td> {{reading.mName}}</td>
+                    <td>{{reading.mDate}}</td>
+                    <td>{{reading.mTime}}</td>
+                    <td>
+                        <button style="margin-right:.5rem;" type="button" class="btn btn-light" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal" (click)="editBtnClick(reading)">Edit</button>
+                        <button type="button" class="btn btn-danger" style="margin-right:.5rem;" (click)='deleteReading(reading._id)'>Delete</button>
+                        <button type="button" class="btn btn-success" style="margin-right:.5rem;" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalValue" (click)="addReadingClick(reading._id)" >Add reading</button>
+                        <button type="button" class="btn btn-primary" (click)="storeIdandGo(reading._id)"  >View Dashboard</button>
+    
+                    </td>
+                </tr>
+    
+            </tbody>
+        </table>
+    
+    </div>
+    <!-- Modal for update meter -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form [formGroup]='updateForm' (ngSubmit)='upDate(clickReadingId)'>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Update Meter</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="meter-input-div">
+                            <div class="mb-3 every-field">
+                                <label for="exampleInputEmail1" class="form-label">Meter Name*</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp" formControlName="mName">
+                                <div *ngIf="updateForm.controls.mName.touched">
+                                    <label class="form-error" *ngIf="updateForm.controls.mName.errors?.required">Can't be
+                                        empty</label>
+                                </div>
+                            </div>
+    
+                            <div class="mb-3 every-field">
+                                <label for="exampleInputEmail1" class="form-label">Date:*</label>
+                                <input type="date" id="datetimepicker" class="form-control" id="exampleInputEmail1"
+                                    id="datetimepicker" aria-describedby="emailHelp" formControlName="mDate"
+                                    [max]='getToday()'>
+                                <div *ngIf="updateForm.controls.mDate.touched">
+                        <label class="form-error" *ngIf="updateForm.controls.mDate.errors?.required">Can't be empty</label>
+                        
+                    </div>
+                            </div>
+                            <div class="mb-3 every-field">
+                                <label for="exampleInputEmail1" class="form-label">*Time:</label>
+                                <input type="time" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                    formControlName="mTime">
+                                <div *ngIf="updateForm.controls.mTime.touched">
+                                    <label class="form-error" *ngIf="updateForm.controls.mTime.errors?.required">Can't be empty</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" [disabled]='updateForm.invalid' class="btn btn-primary"
+                            data-bs-dismiss="modal">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for add reading -->
+    <div class="modal fade" id="exampleModalValue" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form [formGroup]='addReading' (ngSubmit)='addValueToMeter(addReadingIdValue)'>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Enter updated reading</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="meter-input-div">
+                            <div class="mb-3 every-field">
+                                <label for="exampleInputEmail1" class="form-label">Meter Reading*</label>
+                                <input type="number" class="form-control" id="exampleInputEmail1"
+                                    formControlName="rValue">
+                                <div *ngIf="addReading.controls.rValue.touched">
+                                    <label class="form-error" *ngIf="addReading.controls.rValue.errors?.required">This
+                                        field can't be
+                                        empty</label>
+                                </div>
+                            </div>
+    
+                            <div class="mb-3 every-field ">
+                                <div class=" dropdown-div">
+                                    <label for="exampleInputEmail1" class="form-label">*Unit</label>
+                                    <select name="cars" class="form-control" id="cars" formControlName="rUnit">
+                                        <option value="KWH">KWH</option>
+                                        <option value="Volt">Volt</option>
+                                        <option value="Amp.">Amp.</option>
+                                        <option value="PF">PF</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3 every-field">
+                                <label for="exampleInputEmail1" class="form-label">Date:*</label>
+                                <input type="date" id="datetimepicker" class="form-control" id="exampleInputEmail1"
+                                    id="datetimepicker" aria-describedby="emailHelp" formControlName="rDate"
+                                    [max]='getToday()'>
+                                <div *ngIf="addReading.controls.rDate.touched">
+                            <label class="form-error" *ngIf="addReading.controls.rDate.errors?.required">This field can't be empty</label>
+                        </div>
+                            </div>
+                            <div class="mb-3 every-field">
+                                <label for="exampleInputEmail1" class="form-label">*Time:</label>
+                                <input type="time" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                    formControlName="rTime">
+                                <div *ngIf="addReading.controls.rTime.touched">
+                                        <label class="form-error" *ngIf="addReading.controls.rTime.errors?.required">This field can't be empty</label>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+    
+    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" [disabled]='addReading.invalid' class="btn btn-primary"
+                            data-bs-dismiss="modal">Add Reading</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<router-outlet></router-outlet>

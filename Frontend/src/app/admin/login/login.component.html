@@ -1,0 +1,35 @@
+<div style=" justify-content: center;display: flex;text-align: center;">
+    <div>
+        <form [formGroup]="adminLogin">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                <input type="email" class="form-control" fromControlName="email">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" fromControlName="password">
+            </div>
+
+            <div class="mb-3 form-check">
+            <label for="gender">Gender:</label>
+            <div>
+                <input  type="radio" value="male"  formControlName="genderRadio">
+                <label for="male">Male</label>
+            </div>
+            
+            <div>
+                <input  type="radio" value="female"  formControlName="genderRadio">
+                <label for="female">Female</label>
+            </div>
+            
+            </div>
+
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>

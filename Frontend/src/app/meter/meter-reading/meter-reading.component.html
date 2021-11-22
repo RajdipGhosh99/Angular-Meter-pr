@@ -1,0 +1,75 @@
+<div class="addButt">
+    <span><i class="bi bi-plus-square-fill" data-bs-toggle="modal" data-bs-target="#exampleModal2"></i>
+        <p>Add meter</p>
+    </span>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form [formGroup]='readingForm' (ngSubmit)="sendData()">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Meter
+</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="meter-input-root">
+
+                        <div class="meter-input">
+                            <div class="meter-input-div">
+                                <div class="mb-3 every-field">
+                                    <label for="exampleInputEmail1" class="form-label">Meter Name*</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp" formControlName="mName">
+                                    <div *ngIf="readingForm.controls.mName.touched">
+                                        <label class="form-error"
+                                            *ngIf="readingForm.controls.mName.errors?.required">Can't
+                                            be
+                                            empty</label>
+                                    </div>
+                                </div>
+
+
+                                <div class="mb-3 every-field">
+                                    <label for="exampleInputEmail1" class="form-label">Date:*</label>
+                                    <input type="date" id="datetimepicker" class="form-control" id="exampleInputEmail1"
+                                        id="datetimepicker" aria-describedby="emailHelp" formControlName="mDate"
+                                        [max]="getToday()">
+                                    <div *ngIf="readingForm.controls.mDate.touched">
+                                        <label class="form-error"
+                                            *ngIf="readingForm.controls.mDate.errors?.required">Can't
+                                            be empty</label>
+
+                                    </div>
+                                </div>
+                                <div class="mb-3 every-field">
+                                    <label for="exampleInputEmail1" class="form-label">*Time:</label>
+                                    <input type="time" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp" formControlName="mTime">
+                                    <div *ngIf="readingForm.controls.mTime.touched">
+                                        <label class="form-error"
+                                            *ngIf="readingForm.controls.mTime.errors?.required">Can't
+                                            be empty</label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-warning" data-bs-dismiss="modal"
+                        [disabled]='readingForm.invalid'>Add
+                        Meter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

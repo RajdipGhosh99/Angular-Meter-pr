@@ -1,0 +1,81 @@
+<h1 class="hedi">Signup Form</h1>
+<form [formGroup]="signupForm" (ngSubmit)="consoleForm()">
+    <div class="signup-root-div">
+        <div class="signup">
+            <div class="mb-3">
+                <label class="form-label">Enter name* </label>
+                <input type="name" class="form-control" id="exampleInputname" aria-describedby="emailHelp"
+                    placeholder="Enter name here" formControlName="username">
+                <div *ngIf="signupForm.controls.username.touched">
+                    <label class="form-error" *ngIf="signupForm.controls.username.errors?.required">This field is
+                        required</label>
+                    <label class="form-error" *ngIf="signupForm.controls.username.errors?.minlength">Must be 3
+                        characters long</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Enter mobile number*</label>
+                <input type="number" class="form-control" id="exampleInputname" aria-describedby="emailHelp"
+                    placeholder="Enter mobile number" formControlName="mobile">
+                <div *ngIf="signupForm.controls.mobile.touched" >
+                    <label class="form-error" *ngIf="signupForm.controls.mobile.errors?.required">This field is
+                        required</label>
+                    <label class="form-error" *ngIf="signupForm.controls.mobile.errors?.pattern">Must be 10 characters
+                        long,Enter without 0 or +91</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email address*</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    placeholder="Enter email here" formControlName="email">
+                <div *ngIf="signupForm.controls.email.touched">
+                    <label class="form-error" *ngIf="signupForm.controls.email.errors?.required">This field is
+                        required</label>
+                    <label class="form-error" *ngIf="signupForm.controls.email.errors?.email">Enter valid email</label>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1"
+                    placeholder="Enter password here*" formControlName="password">
+                <div *ngIf="signupForm.controls.password.touched">
+                    <label class="form-error" *ngIf="signupForm.controls.password.errors?.required">This field is
+                        required</label>
+                    <label class="form-error" *ngIf="signupForm.controls.password.errors?.minlength">Must be 6
+                        characters long</label>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Skills*</label>
+                <div formArrayName="skills">
+
+                <div class="mb-1 sinput" *ngFor="let skill of getControls() ;index as i ">
+                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter skills"
+                        [formControlName]="i" style="border: none;"  >
+                        <i class="bi bi-trash" (click)="delSkills(i)" ></i>
+                </div>
+                
+                <button type="button" class="btn btn-light addButton mt-2" (click)="addSkills()" ><i class="bi bi-plus"></i>Add Skill</button>
+                
+
+                
+
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Enter your address</label>
+                <input type="address" class="form-control" id="exampleInputname" aria-describedby="emailHelp"
+                    placeholder="Enter address here" formControlName="address">
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label">Check me out</label>
+            </div>
+            <button type="submit" [disabled]="signupForm.invalid" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+
+</form>

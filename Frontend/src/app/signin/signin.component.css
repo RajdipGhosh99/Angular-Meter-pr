@@ -1,0 +1,17 @@
+.signin-root-div{
+    display: flex;
+    justify-content: center;
+    text-align: start;
+    
+}
+.signin{
+    width: 300px;
+}
+.headi{
+    justify-content: center;
+    text-align: center;
+    padding: 3rem;
+}
+.form-error{
+  color: rgb(255, 0, 0);
+}
