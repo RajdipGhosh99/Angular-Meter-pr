@@ -12,11 +12,13 @@ import { DataService } from 'src/app/services/data.service';
 })
 
 export class MeterReadingComponent implements OnInit {
+  time: any = ""
+  date: any = ""
 
-  readingForm=new FormGroup({
-    mName: new FormControl("",[Validators.required]),
-    mDate: new FormControl("", [Validators.required]),
-    mTime: new FormControl("", [Validators.required])
+  readingForm = new FormGroup({
+    mName: new FormControl("", [Validators.required]),
+    mDate: new FormControl("",),
+    mTime: new FormControl("",)
   })
 
   getToday(): string {
@@ -24,31 +26,55 @@ export class MeterReadingComponent implements OnInit {
   }
 
 
-  constructor(private route:Router, private logRegSer: LoginRegisterService,private dataservice:DataService) { }
+  constructor(private route: Router, private logRegSer: LoginRegisterService, private dataservice: DataService) { }
 
   ngOnInit(): void {
   }
-  consoleF(){
-    console.log(this.readingForm.value);
+
+  setdatetimeauto() {
+    this.date = ""
+    this.date = new Date().toISOString().split('T')[0]
+    console.log(this.date);
+
+    this.readingForm.controls.mDate.setValue(this.date)
     
+
+    this.time = ""
+    this.time = new Date().toLocaleTimeString();
+
+
+    console.log(this.time);
+
+    this.readingForm.controls.mTime.setValue(this.time)
+
   }
 
-  goto(){
+  consoleF() {
+    console.log(this.readingForm.value);
+    this.readingForm.reset
+
+
+
+
+  }
+
+  goto() {
     this.route.navigate(["/meter-table"])
   }
- 
-  
-  sendData(){
+
+
+  sendData() {
     let val = this.readingForm.value
-    this.logRegSer.postData(val).subscribe((data)=>{
+    this.logRegSer.postData(val).subscribe((data) => {
       console.log(data);
       alert("Meter reading created sucessfully")
       this.dataservice.setData(data)
-      
+
       this.readingForm.reset()
-    },(error)=>{
-      console.log("Err:"+error)
+    }, (error) => {
+      console.log("Err:" + error)
+      alert("Err:" + error)
     })
-   
+
   }
 }

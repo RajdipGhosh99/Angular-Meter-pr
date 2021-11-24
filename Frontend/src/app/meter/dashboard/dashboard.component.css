@@ -23,4 +23,5 @@
 }
 .header{
   margin-top: 57px;
+  display: flex;
 }

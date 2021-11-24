@@ -1,22 +1,17 @@
-<script>
-    // Add active class to the current button (highlight it)
-    var header = document.getElementById("myDIV");
-    var btns = header.getElementsByClassName("btn");
-    for (var i = 0; i < btns.length; i++) {
-        btns[i].addEventListener((click), function () {
-            var current = document.getElementsByClassName("active1");
-            current[0].class = current[0].class.replace(" active1", "");
-            this.class += " active1";
-        });
+<!-- <script>
+    let button =document.getElementById("kwhBtn")
+    let func=(button)=>{
+     button.click()
+     console.log("button");
     }
-</script>
+    func()
+</script> -->
 
 <div class="header">
     <nav class="navbar navbar navbar-light " style="background-color: hsl(22, 94%, 87%)">
         <div class="d-flex justify-content-center ">
-           <div class="container" style="background-color: hsl(22, 100%, 50%)">
-            <i class="bi bi-arrow-return-left"></i>
-                <a class="navbar-brand " style="background-color: hsl(24, 100%, 1%)" >Navbar</a>
+           <div class="icon-div" >
+            <i class="bi bi-arrow-left-square-fill "></i>
            </div>
         </div>
     </nav>
@@ -24,13 +19,13 @@
 
 <div class="dashboard-root">
     <div class="dashboard">
-        <ul class="nav nav-tabs" id="myDIV">
-            <div class="nav-item" myDIV>
-                <button class=" btn nav-link-cls active1" aria-current="page" (click)="getmetervalue()">All</button>
-                <button class=" btn nav-link-cls " aria-current="page">KWH</button>
-                <button class=" btn nav-link-cls ">Volt</button>
-                <button class=" btn nav-link-cls ">Amp.</button>
-                <button class=" btn nav-link-cls ">PF</button>
+        <ul class="nav nav-tabs" >
+            <div class="nav-item" id="myDIV">
+                <!-- <button class=" btn nav-link-cls active1" aria-current="page" (click)="getmetervalue()">All</button> -->
+                <button class=" btn  btn-light  " aria-current="page" (click)="getmetervaluebykwh()"  id="kwhBtn" >KWH</button>
+                <button class=" btn  btn-light " (click)="getmetervaluebyvolt()" >Volt</button>
+                <button class=" btn  btn-light " (click)="getmetervaluebyamp()" >Amp. </button>
+                <button class=" btn  btn-light " (click)="getmetervaluebypf()">PF</button>
             </div>
 
         </ul>

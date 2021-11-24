@@ -1,6 +1,6 @@
 <div class="addButt">
-    <span><i class="bi bi-plus-square-fill" data-bs-toggle="modal" data-bs-target="#exampleModal2"></i>
-        <p>Add meter</p>
+    <span><i class="bi bi-plus-square-fill" data-bs-toggle="modal" data-bs-target="#exampleModal2" (click)="setdatetimeauto()" ></i>
+        <p >Add meter</p>
     </span>
 </div>
 
@@ -34,7 +34,7 @@
                                 </div>
 
 
-                                <div class="mb-3 every-field">
+                                <!-- <div class="mb-3 every-field">
                                     <label for="exampleInputEmail1" class="form-label">Date:*</label>
                                     <input type="date" id="datetimepicker" class="form-control" id="exampleInputEmail1"
                                         id="datetimepicker" aria-describedby="emailHelp" formControlName="mDate"
@@ -55,7 +55,7 @@
                                             *ngIf="readingForm.controls.mTime.errors?.required">Can't
                                             be empty</label>
                                     </div>
-                                </div>
+                                </div> -->
 
                             </div>
 
