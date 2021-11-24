@@ -1,27 +1,35 @@
 .dashboard-root{
-    margin-top:120px ;
-    margin-left: 100px;
-    margin-right: 100px;
+padding-top: 6rem;
+
     justify-content: center;
     text-align: center;
 }
-.nav-link-cls{
-    padding: 10px;
-    border-radius: 5px;
-    font-weight: 800;
-    border: 1px solid rgb(248, 248, 248);
-    margin-bottom: 10px;
-    margin-left: 4px;
-    color: rgb(0, 0, 0);
-    background-color: rgb(241, 241, 241);
-    cursor: pointer;
-
+.table-root{
+  width:50%
 }
-
 .nav-link-cls:hover {
   background-color: rgb(203, 236, 255);
+  position: absolute;
 }
 .header{
   margin-top: 57px;
-  display: flex;
+}
+.header>nav>i{
+  font-size: 2rem;
+  cursor: pointer;
+}
+.header>nav>i:hover{
+color: red;
+}
+.header>nav>p>strong{
+  color: rgb(80, 106, 255);
+  font-size: 1.5rem;
+  
+}
+.header>nav>p{
+  font-size:1.2rem;
+}
+.nav-item{
+  margin-bottom: 5px;
+
 }

@@ -93,7 +93,7 @@
             <div class="modal-content">
                 <form [formGroup]='addReading' (ngSubmit)='addValueToMeter(addReadingIdValue)'>
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Enter updated reading</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Add Reading</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -111,7 +111,7 @@
     
                             <div class="mb-3 every-field ">
                                 <div class=" dropdown-div">
-                                    <label for="exampleInputEmail1" class="form-label">*Unit</label>
+                                    <label for="exampleInputEmail1" class="form-label">*Unit <i class="bi bi-chevron-down"></i></label>
                                     <select name="cars" class="form-control" id="cars" formControlName="rUnit">
                                         <option value="KWH">KWH</option>
                                         <option value="Volt">Volt</option>

@@ -31,25 +31,32 @@ export class MeterReadingComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  setdatetimeauto() {
+
+  consoleF() {
     this.date = ""
     this.date = new Date().toISOString().split('T')[0]
     console.log(this.date);
 
     this.readingForm.controls.mDate.setValue(this.date)
-    
+
 
     this.time = ""
     this.time = new Date().toLocaleTimeString();
+    const convertTime = (timee: any) => {
+      const [time, modifier] = timee.split(' ');
+      let [hours, minutes] = time.split(':');
+      if (hours === '12') {
+        hours = '00';
+      }
+      if (modifier === 'PM') {
+        hours = parseInt(hours, 10) + 12;
+      }
+      return `${hours}:${minutes}`;
+    };
 
+    console.log(convertTime(this.time));
 
-    console.log(this.time);
-
-    this.readingForm.controls.mTime.setValue(this.time)
-
-  }
-
-  consoleF() {
+    this.readingForm.controls.mTime.setValue(convertTime(this.time))
     console.log(this.readingForm.value);
     this.readingForm.reset
 
@@ -64,17 +71,43 @@ export class MeterReadingComponent implements OnInit {
 
 
   sendData() {
+
+    this.date = ""
+    this.date = new Date().toISOString().split('T')[0]
+    console.log(this.date);
+
+    this.readingForm.controls.mDate.setValue(this.date)
+
+
+    this.time = ""
+    this.time = new Date().toLocaleTimeString();
+    const convertTime = (timee: any) => {
+      const [time, modifier] = timee.split(' ');
+      let [hours, minutes] = time.split(':');
+      if (hours === '12') {
+        hours = '00';
+      }
+      if (modifier === 'PM') {
+        hours = parseInt(hours, 10) + 12;
+      }
+      return `${hours}:${minutes}`;
+    };
+
+    console.log(convertTime(this.time));
+
+    this.readingForm.controls.mTime.setValue(convertTime(this.time))
     let val = this.readingForm.value
     this.logRegSer.postData(val).subscribe((data) => {
       console.log(data);
       alert("Meter reading created sucessfully")
       this.dataservice.setData(data)
 
-      this.readingForm.reset()
     }, (error) => {
       console.log("Err:" + error)
       alert("Err:" + error)
     })
+    
+    this.readingForm.reset
 
   }
 }

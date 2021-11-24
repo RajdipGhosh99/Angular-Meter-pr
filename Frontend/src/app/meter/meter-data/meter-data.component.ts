@@ -87,6 +87,7 @@ export class MeterDataComponent implements OnInit {
   addValueToMeter( ID:any){
    this.logRegSer.addValueToMeter(ID,this.addReading.value).subscribe((data)=>{
      console.log(data);
+     alert("Meter Reading Added Sucessfull")
      
    })
    this.addReading.reset()

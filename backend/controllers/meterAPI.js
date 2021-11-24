@@ -27,7 +27,7 @@ router.post("/add", async (req, res) => {
         }
 
     } catch (error) {
-        res.status(400).json("DB error err:" + error)
+        res.status(400).json("Err:"+error)
     }
 })
 

@@ -8,7 +8,7 @@ import { LoginRegisterService } from 'src/app/login-register.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  meterfuldata: any = ''
+  meterName: any = ''
   mainMeterReadings: any = []
   meterReadings: any = []
 
@@ -22,11 +22,14 @@ export class DashboardComponent implements OnInit {
    
 
   }
-
+  goBack() {
+  window.history.back();
+  }
 
   getmetervalue() {
     this.logRegSer.getMeterValue(this.objId).subscribe((d: any) => {
       this.mainMeterReadings = d.mReading
+      this.meterName=d.mName
       console.log(this.mainMeterReadings);
       
       this.getmetervaluebykwh()
