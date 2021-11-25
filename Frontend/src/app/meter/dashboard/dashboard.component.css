@@ -1,11 +1,15 @@
 .dashboard-root{
 padding-top: 6rem;
-
-    justify-content: center;
-    text-align: center;
+width: 100vw;
+height: 100vh;
 }
+.main{
+  flex-wrap:nowrap;
+}
+
 .table-root{
-  width:50%
+  margin: 1rem;
+ 
 }
 .nav-link-cls:hover {
   background-color: rgb(203, 236, 255);
@@ -32,4 +36,12 @@ color: red;
 .nav-item{
   margin-bottom: 5px;
 
+}
+.chart-root{
+  height:80vh;
+  width:80vw; 
+margin: 1rem;
+}
+.nav-item1{
+  justify-content: start;
 }

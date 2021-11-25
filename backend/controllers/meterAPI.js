@@ -27,7 +27,7 @@ router.post("/add", async (req, res) => {
         }
 
     } catch (error) {
-        res.status(400).json("Err:"+error)
+        res.status(400).json("Err:" + error)
     }
 })
 
@@ -82,15 +82,15 @@ router.delete("/delete/:vId", async (req, res) => {
 
 //add value into mReading Array through id
 
-router.put("/add-reading/:pId",async (req, res) => {
-   const _id=req.params.pId
-   let  { rValue,rUnit, rDate,rTime } =req.body
+router.put("/add-reading/:pId", async (req, res) => {
+    const _id = req.params.pId
+    let { rValue, rUnit, rDate, rTime } = req.body
     try {
-        if (!rValue ||!rUnit|| !rDate || !rTime) {
+        if (!rValue || !rUnit || !rDate || !rTime) {
             res.status(422).json("Enter Reading Fields properly")
-            
+
         } else {
-            const dbResponse = await meterModel.findByIdAndUpdate(_id, { $push: { mReading: { rValue, rUnit, rDate, rTime } } }, { new: true})
+            const dbResponse = await meterModel.findByIdAndUpdate(_id, { $push: { mReading: { rValue, rUnit, rDate, rTime } } }, { new: true })
             res.status(200).json(dbResponse)
         }
 
@@ -99,23 +99,47 @@ router.put("/add-reading/:pId",async (req, res) => {
         res.status(400).json("Somehing Error:" + error)
     }
 })
-  
+
+
+// delete value into mReading Array through id
+
+router.put("/delete-reading/:pId", async (req, res) => {
+    const _id = req.params.pId
+    console.log(req.body._id);
+    
+    try {
+        if (!req.body._id) {
+            res.status(422).json("Enter Reading Fields properly")
+
+        } else {
+            const dbResponse = await meterModel.findByIdAndUpdate(_id, { $pull: { mReading: { _id:req.body._id } } }, )
+            res.status(200).json(dbResponse)
+        }
+
+
+    } catch (error) {
+        res.status(400).json("Somehing Error:" + error)
+    }
+})
+
+
+
 
 //search by id
-router.get("/find-by-id/:pId", async(req, res) => {
+router.get("/find-by-id/:pId", async (req, res) => {
     try {
-        const _id=req.params.pId
-        const dbResponse=await meterModel.findById(_id)
+        const _id = req.params.pId
+        const dbResponse = await meterModel.findById(_id)
         if (dbResponse) {
             res.status(200).json(dbResponse)
         } else {
             throw new error
         }
-        
+
     } catch (error) {
         res.status(400).json("Data not found:" + error)
     }
-  
+
 });
 
 

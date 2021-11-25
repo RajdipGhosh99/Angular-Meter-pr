@@ -16,21 +16,17 @@
         <p>Meter Name : <strong>{{meterName}}</strong></p>
     </nav>
 </div>
-<div class="main">
+<div class="main d-flex justify-content-center">
     <div class="dashboard-root">
-        <div class="dashboard">
-            <ul class="nav nav-tabs">
-                <div class="nav-item">
-                    <!-- <button class=" btn nav-link-cls active1" aria-current="page" (click)="getmetervalue()">All</button> -->
-                    <button class=" btn  btn-light kwhBtn " aria-current="page" (click)="getmetervaluebykwh()">KWH</button>
-                    <button class=" btn  btn-light " (click)="getmetervaluebyvolt()">Volt</button>
-                    <button class=" btn  btn-light " (click)="getmetervaluebyamp()">Amp. </button>
-                    <button class=" btn  btn-light " (click)="getmetervaluebypf()">PF</button>
-                </div>
-    
-            </ul>
-        </div>
+       
         <div class="table-root">
+            <div class="nav-item">
+                <!-- <button class=" btn nav-link-cls active1" aria-current="page" (click)="getmetervalue()">All</button> -->
+                <button class=" btn  btn-light kwhBtn " aria-current="page" (click)="getmetervaluebykwh()">KWH</button>
+                <button class=" btn  btn-light " (click)="getmetervaluebyvolt()">Volt</button>
+                <button class=" btn  btn-light " (click)="getmetervaluebyamp()">Amp. </button>
+                <button class=" btn  btn-light " (click)="getmetervaluebypf()">PF</button>
+            </div>
             <table class="table  ">
                 <thead>
                     <tr class="text-center">
@@ -57,9 +53,12 @@
     
                 </tbody>
             </table>
+            <div  *ngIf="meterReadings.length==0">
+                <h2 style="color: red; text-align: center;">No data found</h2>
+            </div>
         </div>
     </div>
     <div class="chart-root">
-    
+    <app-graph [Cdata]='meterReadings'></app-graph>
     </div>
 </div>

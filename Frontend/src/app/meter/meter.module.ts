@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { DashboardComponent } from './dashboard/dashboard.component'
 import { AppRoutingModule } from '../app-routing.module';
+import { GraphComponent } from './graph/graph.component';
 
 
 
@@ -16,7 +17,8 @@ import { AppRoutingModule } from '../app-routing.module';
   declarations: [
     MeterReadingComponent,
     MeterDataComponent,
-    DashboardComponent
+    DashboardComponent,
+    GraphComponent
   ],
   imports: [
     CommonModule,
