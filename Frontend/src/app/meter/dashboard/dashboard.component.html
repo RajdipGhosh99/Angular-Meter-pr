@@ -22,10 +22,10 @@
         <div class="table-root">
             <div class="nav-item">
                 <!-- <button class=" btn nav-link-cls active1" aria-current="page" (click)="getmetervalue()">All</button> -->
-                <button class=" btn  btn-light kwhBtn " aria-current="page" (click)="getmetervaluebykwh()">KWH</button>
-                <button class=" btn  btn-light " (click)="getmetervaluebyvolt()">Volt</button>
-                <button class=" btn  btn-light " (click)="getmetervaluebyamp()">Amp. </button>
-                <button class=" btn  btn-light " (click)="getmetervaluebypf()">PF</button>
+                <button class=" btn  btn-light " [ngClass]="'KWH'===activeClass? 'active' : '' " (click)="meterValueByUnit('KWH')">KWH</button>
+                <button class=" btn  btn-light " [ngClass]="'Volt'===activeClass? 'active' : '' " (click)="meterValueByUnit('Volt')">Volt</button>
+                <button class=" btn  btn-light " [ngClass]="'Amp.'===activeClass? 'active' : '' " (click)="meterValueByUnit('Amp.')">Amp. </button>
+                <button class=" btn  btn-light " [ngClass]="'PF'===activeClass? 'active' : '' " (click)="meterValueByUnit('PF')">PF</button>
             </div>
             <table class="table  ">
                 <thead>
@@ -41,12 +41,12 @@
                     <tr class="text-center" *ngFor="let readings of meterReadings;index as i">
                         <!-- <th scope="row">1</th> -->
                         <td>{{i+1}}</td>
-                        <td>{{meterReadings[i].rValue+" "+meterReadings[i].rUnit}}</td>
-                        <td>{{meterReadings[i].rDate}}</td>
-                        <td>{{meterReadings[i].rTime}}</td>
+                        <td>{{readings.rValue}}</td>
+                        <td>{{readings.rDate}}</td>
+                        <td>{{readings.rTime}}</td>
                         <td>
-                            <button style="margin-right:.5rem;" type="button" class="btn btn-light">Edit</button>
-                            <button type="button" class="btn btn-danger" style="margin-right:.5rem;">Delete</button>
+                            
+                            <button type="button" class="btn btn-danger" style="margin-right:.5rem;" (click)="deleteMeterReading(readings._id)" >Delete</button>
     
                         </td>
                     </tr>

@@ -143,6 +143,29 @@ router.get("/find-by-id/:pId", async (req, res) => {
 });
 
 
+router.post("/search-by-unit/:pId", async(req, res) => {
+    const _id = req.params.pId
+    try {
+        if (!req.body.rUnit) {
+            res.status(422).json("Enter Reading Fields properly")
+
+        } else {
+            const dbResponse = await meterModel.findOne({_id})
+           
+            let sortData = dbResponse.mReading.filter(v => v.rUnit == req.body.rUnit )
+
+
+            res.status(200).json(sortData)
+        }
+
+
+    } catch (error) {
+        res.status(400).json("Somehing Error:" + error)
+    }
+});
+
+
+
 
 
 

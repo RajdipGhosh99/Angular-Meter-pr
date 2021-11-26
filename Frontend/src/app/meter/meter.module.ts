@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { DashboardComponent } from './dashboard/dashboard.component'
 import { AppRoutingModule } from '../app-routing.module';
 import { GraphComponent } from './graph/graph.component';
+import { Graph2Component } from './graph2/graph2.component';
 
 
 
@@ -18,7 +19,8 @@ import { GraphComponent } from './graph/graph.component';
     MeterReadingComponent,
     MeterDataComponent,
     DashboardComponent,
-    GraphComponent
+    GraphComponent,
+    Graph2Component
   ],
   imports: [
     CommonModule,

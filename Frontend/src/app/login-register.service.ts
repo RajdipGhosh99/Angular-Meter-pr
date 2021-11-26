@@ -56,6 +56,21 @@ export class LoginRegisterService {
       catchError(this.handelError))
   }
 
+  getMeterValueByUnit(oId:any,oUnit:any){
+    let Body = { "rUnit":oUnit}
+    let apiUrl =`http://localhost:9000/value/search-by-unit/${oId}`
+    return this.httpclient.post(apiUrl,Body)
+    .pipe(catchError(this.handelError))
+
+  }
+
+  deleteMeterReadingById(oId:any,rId:any){
+    let Body = { "_id": rId }
+    let apiUrl = `http://localhost:9000/value//delete-reading/${oId}`
+    return this.httpclient.put(apiUrl,Body).pipe(catchError(this.handelError))
+
+  }
+
   private handelError(error:HttpErrorResponse){
     return throwError(error.error)
 

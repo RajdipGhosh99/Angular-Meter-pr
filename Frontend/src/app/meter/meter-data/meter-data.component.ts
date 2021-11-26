@@ -108,9 +108,10 @@ export class MeterDataComponent implements OnInit {
         })
 
         this.dataservice.setalldata(dataarr)
-
+alert("Meter deleted sucessfully")
       })
     }
+    
   }
 
   getData() {
