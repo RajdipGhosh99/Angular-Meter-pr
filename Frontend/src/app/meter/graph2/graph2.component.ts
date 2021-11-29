@@ -12,7 +12,4 @@ export class Graph2Component implements OnInit {
   ngOnInit(): void {
   }
 
-
-  
-
 }

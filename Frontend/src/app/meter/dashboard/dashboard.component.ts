@@ -1,6 +1,7 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LoginRegisterService } from 'src/app/login-register.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,7 +32,6 @@ export class DashboardComponent implements OnInit,OnChanges {
     this.activeClass=unit
     this.logRegSer.getMeterValueByUnit(this.objId, unit).subscribe(d => {
       this.meterReadings = d
-      console.log("ghjhjhgb" , d);
       
 
     })
@@ -39,21 +39,46 @@ export class DashboardComponent implements OnInit,OnChanges {
   }
 
   deleteMeterReading(rId:any){
-    let windowConfirm= window.confirm("Are you sure")
-    if (windowConfirm) {
-      this.logRegSer.deleteMeterReadingById(this.objId, rId).subscribe(d => {
-        console.log("deleteMeterReading :" + d);
-        // alert("Meter reading deleted sucessfully")
-        this.meterValueByUnit(this.activeClass)
-      })
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success ml-3',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.logRegSer.deleteMeterReadingById(this.objId, rId).subscribe(d => {
+          console.log("deleteMeterReading :" + d);
+          // alert("Meter reading deleted sucessfully")
+          this.meterValueByUnit(this.activeClass)
+        })
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'Your reading has been deleted.',
+          'success'
+        )
+      } 
+    })
+
+
       
-    }
+      
+    
     
     
 
   }
   ngOnChanges(){
-    console.log("dashboard on chang es is called");
+    
     
   }
 

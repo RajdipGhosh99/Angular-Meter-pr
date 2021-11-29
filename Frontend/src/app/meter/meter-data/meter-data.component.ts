@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { LoginRegisterService } from 'src/app/login-register.service';
 import { DataService } from 'src/app/services/data.service';
 
+import Swal from 'sweetalert2'
+
+
 
 @Component({
   selector: 'app-meter-data',
@@ -66,6 +69,23 @@ export class MeterDataComponent implements OnInit {
       })
       this.dataservice.setalldata(dataarr)
 
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+
+      Toast.fire({
+        icon: 'success',
+        title: 'Meter updated successfully'
+      })
+
     })
 
   }
@@ -87,7 +107,22 @@ export class MeterDataComponent implements OnInit {
   addValueToMeter( ID:any){
    this.logRegSer.addValueToMeter(ID,this.addReading.value).subscribe((data)=>{
      console.log(data);
-     alert("Meter Reading Added Sucessfull")
+     const Toast = Swal.mixin({
+       toast: true,
+       position: 'top',
+       showConfirmButton: false,
+       timer: 2500,
+       timerProgressBar: true,
+       didOpen: (toast) => {
+         toast.addEventListener('mouseenter', Swal.stopTimer)
+         toast.addEventListener('mouseleave', Swal.resumeTimer)
+       }
+     })
+
+     Toast.fire({
+       icon: 'success',
+       title: 'Reading added successfully'
+     })
      
    })
    this.addReading.reset()
@@ -96,21 +131,43 @@ export class MeterDataComponent implements OnInit {
 
   deleteReading(val: any) {
 
-    const confirmWindow = window.confirm("Are you sure??")
-    if (confirmWindow) {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success ml-3 ',
+        cancelButton: 'btn btn-danger '
+        
+      },
+      buttonsStyling: false
+    })
 
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel!   ',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.logRegSer.deleteData(val).subscribe((data) => {
+          console.log(data);
+          let dataarr = this.meterReadings.filter((val2: any) => {
 
-      this.logRegSer.deleteData(val).subscribe((data) => {
-        console.log(data);
-        let dataarr = this.meterReadings.filter((val2: any) => {
+            return val2._id != val
+          })
 
-          return val2._id != val
+          this.dataservice.setalldata(dataarr)
         })
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'Meter has been deleted.',
+          'success'
+        )
+      }
+    })
+    console.log(swalWithBootstrapButtons);
 
-        this.dataservice.setalldata(dataarr)
-alert("Meter deleted sucessfully")
-      })
-    }
+    
     
   }
 

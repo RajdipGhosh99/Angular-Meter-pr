@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginRegisterService } from 'src/app/login-register.service';
 import { DataService } from 'src/app/services/data.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -99,12 +100,42 @@ export class MeterReadingComponent implements OnInit {
     let val = this.readingForm.value
     this.logRegSer.postData(val).subscribe((data) => {
       console.log(data);
-      alert("Meter reading created sucessfully")
       this.dataservice.setData(data)
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+
+      Toast.fire({
+        icon: 'success',
+        title: 'Meter added successfully'
+      })
 
     }, (error) => {
       console.log("Err:" + error)
-      alert("Err:" + error)
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+
+      Toast.fire({
+        icon: 'error',
+        title: error
+      })
     })
     
     this.readingForm.reset
