@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MeterMainComponent } from './meter-main.component';
+import { MeterHomeComponent } from './meter-home.component';
 
-describe('MeterMainComponent', () => {
-  let component: MeterMainComponent;
-  let fixture: ComponentFixture<MeterMainComponent>;
+describe('MeterHomeComponent', () => {
+  let component: MeterHomeComponent;
+  let fixture: ComponentFixture<MeterHomeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MeterMainComponent ]
+      declarations: [ MeterHomeComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MeterMainComponent);
+    fixture = TestBed.createComponent(MeterHomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

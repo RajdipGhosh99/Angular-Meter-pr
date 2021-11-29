@@ -10,6 +10,8 @@ import { DashboardComponent } from './dashboard/dashboard.component'
 import { AppRoutingModule } from '../app-routing.module';
 import { GraphComponent } from './graph/graph.component';
 import { Graph2Component } from './graph2/graph2.component';
+import { MeterHomeComponent } from './meter-home/meter-home.component';
+import { MeterRoutingModule } from './meter-routing.module';
 
 
 
@@ -20,7 +22,8 @@ import { Graph2Component } from './graph2/graph2.component';
     MeterDataComponent,
     DashboardComponent,
     GraphComponent,
-    Graph2Component
+    Graph2Component,
+    MeterHomeComponent
   ],
   imports: [
     CommonModule,
@@ -28,12 +31,7 @@ import { Graph2Component } from './graph2/graph2.component';
     ReactiveFormsModule,
     MatButtonModule,
     MatIconModule,
-    AppRoutingModule
-  ],
-  exports:[
-    MeterDataComponent,
-    MeterReadingComponent,
-    DashboardComponent
+    MeterRoutingModule
   ]
     
   

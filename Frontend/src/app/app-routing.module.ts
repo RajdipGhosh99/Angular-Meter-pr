@@ -5,9 +5,6 @@ import { SigninComponent } from './signin/signin.component';
 import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
 import { AboutComponent } from './about/about.component';
-import { MeterMainComponent } from './meter-main/meter-main.component';
-import { MeterDataComponent } from './meter/meter-data/meter-data.component';
-import { DashboardComponent } from './meter/dashboard/dashboard.component';
 const routes: Routes = [
   {
     path:"register",
@@ -29,17 +26,9 @@ const routes: Routes = [
     path:"contact",
     component:ContactComponent
   },{
-    path:"meter",
-    component: MeterMainComponent
+    path:"meter",loadChildren:()=>(import('./meter/meter.module')).then(m=>m.MeterModule)
   },
-  {
-    path:"meter-table",
-    component:MeterDataComponent
-  },
-  {
-    path:"meter-reading-value/:id",
-    component:DashboardComponent
-  }
+  
 ];
 
 @NgModule({

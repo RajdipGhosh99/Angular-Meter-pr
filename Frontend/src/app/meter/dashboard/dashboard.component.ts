@@ -1,6 +1,7 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Data } from '@angular/router';
 import { LoginRegisterService } from 'src/app/login-register.service';
+import { DataService } from 'src/app/services/data.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -8,37 +9,46 @@ import Swal from 'sweetalert2';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit,OnChanges {
+export class DashboardComponent implements OnInit, OnChanges{
+
   meterName: any = ''
   meterReadings: any = []
   activeClass: string = "KWH"
-
-  constructor(private logRegSer: LoginRegisterService, private route: ActivatedRoute) { }
   objId = ""
+
+  constructor(private logRegSer: LoginRegisterService, private route: ActivatedRoute,private dataservice:DataService) {
+this.setmetername()
+
+  }
+
+
 
   ngOnInit(): void {
     this.objId = this.route.snapshot.params.id
     console.log(this.objId);
-   this.meterValueByUnit("KWH")
-
-
+    this.meterValueByUnit("KWH")
   }
+
+  setmetername(){
+    this.dataservice.getMeterName().subscribe(d=>this.meterName=d)
+  }
+
   goBack() {
     window.history.back();
   }
 
 
   meterValueByUnit(unit: string) {
-    this.activeClass=unit
+    this.activeClass = unit
     this.logRegSer.getMeterValueByUnit(this.objId, unit).subscribe(d => {
       this.meterReadings = d
-      
+
 
     })
-    console.log("meterValueByUnit" +this.meterReadings);
+    console.log("meterValueByUnit" + this.meterReadings);
   }
 
-  deleteMeterReading(rId:any){
+  deleteMeterReading(rId: any) {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success ml-3',
@@ -66,25 +76,24 @@ export class DashboardComponent implements OnInit,OnChanges {
           'Your reading has been deleted.',
           'success'
         )
-      } 
+      }
     })
 
 
-      
-      
-    
-    
-    
+
+
+
+
+
 
   }
-  ngOnChanges(){
-    
-    
+  ngOnChanges() {
+
+
   }
 
 
-
-
+ 
 
   // deleteMeterReadingById(){
 

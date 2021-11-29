@@ -90,9 +90,12 @@ export class MeterDataComponent implements OnInit {
 
   }
 
-  storeIdandGo(val:any){
-    console.log(val);
-    this.router.navigate(['/meter-reading-value',val]) 
+  storeIdandGo(iD:any,mName:any){
+    console.log(iD);
+    console.log(mName);
+    this.dataservice.setMeterName(mName)
+    
+    this.router.navigate(['/meter/dashboard',iD])
   }
 
   editBtnClick(reading: any) {

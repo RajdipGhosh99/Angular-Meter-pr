@@ -15,8 +15,8 @@ import { AdminModule } from './admin/admin.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; 
 import { MeterModule } from './meter/meter.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MeterMainComponent } from './meter-main/meter-main.component';
-import { ConvertFrom24To12FormatPipe } from './pipes/convert-from24-to12-format.pipe';
+
+
 
 
 
@@ -30,8 +30,7 @@ import { ConvertFrom24To12FormatPipe } from './pipes/convert-from24-to12-format.
     AboutComponent,
     ContactComponent,
     RegisterComponent,
-    MeterMainComponent,
-    ConvertFrom24To12FormatPipe,
+    
     
   ],
   imports: [

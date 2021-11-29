@@ -31,7 +31,10 @@ export class DataService {
 
   setMeterName(name:any){
     this.MeterName=name
-    this.dataService.next(this.MeterName)
+    this.meterNameService.next(this.MeterName)
+  }
+  getMeterName(){
+    return this.meterNameService
   }
  
 }
