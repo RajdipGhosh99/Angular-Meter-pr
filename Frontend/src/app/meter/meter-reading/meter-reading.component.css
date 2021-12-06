@@ -36,4 +36,5 @@ padding-left: 12px;
 }
 .addButt>span>i:hover{
   color: red;
+  cursor: pointer;
 }

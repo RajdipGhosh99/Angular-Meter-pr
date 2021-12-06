@@ -19,6 +19,9 @@ export class MeterDataComponent implements OnInit {
   meterReadings: any = []
   clickReadingId: string = ''
   addReadingIdValue:string=""
+  userData:any
+  isadmin:boolean=false
+  dashBoardPermission:boolean=false
 
 
   count: number = 0;
@@ -26,8 +29,6 @@ export class MeterDataComponent implements OnInit {
 
   updateForm = new FormGroup({
     mName: new FormControl("", [Validators.required]),
-    mDate: new FormControl("", [Validators.required]),
-    mTime: new FormControl("", [Validators.required])
   })
 
 
@@ -42,7 +43,7 @@ export class MeterDataComponent implements OnInit {
   constructor(private logRegSer: LoginRegisterService, private dataservice: DataService, private router:Router) { }
 
   ngOnInit(): void {
-
+    this.getUserData()
 
     this.dataservice.getData().subscribe((data) => {
       this.meterReadings = data
@@ -52,6 +53,31 @@ export class MeterDataComponent implements OnInit {
   getToday(): string {
     return new Date().toISOString().split('T')[0]
   }
+
+getUserData(){
+  this.dataservice.getUserData().subscribe(d=>{
+    this.userData=d
+    console.log( "bhbjdbjnbj"+ this.userData);
+    
+    this.isadmin = d.isAdmin
+    console.log("gbjhbgdhbbbsbshb");
+    
+
+    let val1 =  d.role_coll.filter((v: any) =>{
+       return v.module_name == "dashboard"
+      
+    })
+    
+    console.log(val1);
+    
+    if (val1.length == 1) {
+      this.dashBoardPermission = true
+    }else{
+      this.dashBoardPermission = false
+    }
+  })
+}
+
 
   upDate(objId: any) {
     let uD = this.updateForm.value
@@ -73,7 +99,7 @@ export class MeterDataComponent implements OnInit {
         toast: true,
         position: 'top',
         showConfirmButton: false,
-        timer: 3000,
+        timer: 1500,
         timerProgressBar: true,
         didOpen: (toast) => {
           toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -102,8 +128,7 @@ export class MeterDataComponent implements OnInit {
     console.log(reading);
     this.clickReadingId = reading._id
     this.updateForm.controls.mName.setValue(reading.mName)
-    this.updateForm.controls.mDate.setValue(reading.mDate)
-    this.updateForm.controls.mTime.setValue(reading.mTime)
+    
   }
 
 

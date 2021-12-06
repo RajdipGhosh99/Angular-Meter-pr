@@ -1,5 +1,9 @@
 <div class="home-root">
-    <div class="home">
+
+    <div style="color: red;margin: 57px; padding: 25rem;" *ngIf="!isLogin">
+        <h1>You don't have permission</h1>
+    </div>
+    <div class="home" *ngIf="isLogin">
 
         <app-meter-reading></app-meter-reading>
         <app-meter-data></app-meter-data>

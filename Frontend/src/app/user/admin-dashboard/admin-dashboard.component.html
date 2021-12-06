@@ -1,0 +1,219 @@
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;margin-top: 57px;">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="#"> <strong>User :</strong> {{userFullData.user_name}}</a>
+            <a style="color: red;" *ngIf='userFullData.isAdmin'>(super admin)</a>
+            <a style="color: red;" *ngIf='userFullData.isAdmin==false'>(user)</a>
+        </a>
+
+        <div>
+            <div class=" ms-auto mb-2 mb-lg-0">
+                <a class="btn btn-warning " aria-current="page" href="" data-bs-toggle="modal"
+                    data-bs-target="#exampleModalValue"  (click)="getAllRoles()">Add User</a>
+
+            </div>
+
+        </div>
+    </div>
+</nav>
+
+
+<div class="tableM" style="margin: 3rem; align-items: center;" >
+    <mat-card>
+        <table class="table  ">
+
+            <thead>
+                <tr class="text-center">
+                    <th scope="col">#</th>
+                    <th scope="col">User name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Created Date</th>
+                    <th scope="col">Created by</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="text-center" *ngFor="let user of userData;index as i">
+                    <!-- <th scope="row">1</th> -->
+                    <td>{{i+1}}</td>
+                    <td>{{user.user_name}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.password}}</td>
+                    <td>
+                        <ng-container *ngFor="let module of user.role_coll_id">
+                            <span>{{module.role_name}}</span>
+                    
+                        </ng-container>
+                    </td>
+                    <td>{{user.created_date}}</td>
+                    <td>{{user.created_by}}</td>
+                    <td>
+                        <button style="margin-right:.5rem;" type="button" class="btn btn-light" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal" (click)="getUserId(user)">Edit</button>
+                        <button type="button" class="btn btn-danger" style="margin-right:.5rem;"
+                            (click)=' deleteUser(user._id)'>Delete</button>
+
+
+                    </td>
+
+                </tr>
+                <div>
+                    <p style="color: red;text-align:center; margin: 2rem;font-size:x-large; "
+                        *ngIf="userData.length==0">No data found</p>
+                </div>
+
+
+            </tbody>
+
+        </table>
+
+    </mat-card>
+
+</div>
+
+<!-- <div class="user-div" *ngIf="userFullData.isAdmin ==false" style="margin: 10rem;">
+    <p>{{userFullData.role_coll | json}}</p>
+    <strong>Your Permissions</strong>
+    <ul>
+
+        <li *ngFor="let module of userFullData.role_coll">
+            <span style="cursor: pointer;" routerLink="/meter">{{module.module_name}}</span>
+        </li>
+
+    </ul>
+
+
+
+
+</div> -->
+
+
+
+
+<!-- Modal for update user -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form [formGroup]='addUser' (ngSubmit)='updateForm()'>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="meter-input-div">
+                        <div class="mb-3 every-field">
+                            <label class="form-label">User Name*</label>
+                            <input type="text" class="form-control" formControlName="user_name">
+                            <div *ngIf="addUser.controls.user_name.touched">
+                                <label class="form-error" *ngIf="addUser.controls.user_name.errors?.required">This
+                                    field can't be
+                                    empty</label>
+                            </div>
+                        </div>
+            
+                        <div class="mb-3 every-field">
+                            <label for="exampleInputEmail1" class="form-label">Email*</label>
+                            <input type="email" class="form-control" formControlName="email">
+                            <div *ngIf="addUser.controls.email.touched">
+                                <label class="form-error" *ngIf="addUser.controls.email.errors?.required">This
+                                    field can't be
+                                    empty</label>
+                            </div>
+                        </div>
+            
+                        <div class="mb-3 every-field">
+                            <label class="form-label">Temporary Password*</label>
+                            <input type="text" class="form-control" formControlName="password">
+                            <div *ngIf="addUser.controls.password.touched">
+                                <label class="form-error" *ngIf="addUser.controls.password.errors?.required">This
+                                    field can't be
+                                    empty</label>
+                            </div>
+                        </div>
+            
+            
+                        <div class="mb-3 every-field">
+                            <label class="form-label">Select Role* :</label>
+                            <select formControlName="role_coll_id" class="form-control">
+                                <option value="{{opt._id}}" *ngFor="let opt of roleOptions">{{opt.role_name}}</option>
+                            </select>
+            
+                        </div>
+            
+                    </div>
+                </div>
+            
+            
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Edit User</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for add user -->
+<div class="modal fade" id="exampleModalValue" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form [formGroup]='addUser' (ngSubmit)='addUserForm()'>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="meter-input-div">
+                        <div class="mb-3 every-field">
+                            <label class="form-label">User Name*</label>
+                            <input type="text" class="form-control" formControlName="user_name">
+                            <div *ngIf="addUser.controls.user_name.touched">
+                                <label class="form-error" *ngIf="addUser.controls.user_name.errors?.required">This
+                                    field can't be
+                                    empty</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 every-field">
+                            <label for="exampleInputEmail1" class="form-label">Email*</label>
+                            <input type="email" class="form-control" formControlName="email">
+                            <div *ngIf="addUser.controls.email.touched">
+                                <label class="form-error" *ngIf="addUser.controls.email.errors?.required">This
+                                    field can't be
+                                    empty</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 every-field">
+                            <label class="form-label">Temporary Password*</label>
+                            <input type="text" class="form-control" formControlName="password">
+                            <div *ngIf="addUser.controls.password.touched">
+                                <label class="form-error" *ngIf="addUser.controls.password.errors?.required">This
+                                    field can't be
+                                    empty</label>
+                            </div>
+                        </div>
+
+
+                        <div class="mb-3 every-field">
+                            <label class="form-label">Select Role* :</label>
+                            <select  formControlName="role_coll_id" class="form-control">
+                                <option value="{{opt._id}}" *ngFor="let opt of roleOptions" >{{opt.role_name}}</option>
+                            </select>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Add User</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
+
 
 @Component({
   selector: 'app-meter-home',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MeterHomeComponent implements OnInit {
 
-  constructor() { }
+  isLogin:boolean=false
+
+  constructor(private dataService:DataService) { }
 
   ngOnInit(): void {
+  this.dataService.getLoginStatus().subscribe((status)=>{
+    this.isLogin=status
+  })
+
   }
 
 }

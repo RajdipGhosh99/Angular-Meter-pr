@@ -7,21 +7,16 @@ import Swal from 'sweetalert2';
 
 
 @Component({
-  selector: 'app-meter-reading',
-  templateUrl: './meter-reading.component.html',
-  styleUrls: ['./meter-reading.component.css']
+  selector: 'app-addmeter',
+  templateUrl: './addmeter.component.html',
+  styleUrls: ['./addmeter.component.css']
 })
+export class AddmeterComponent implements OnInit {
 
-export class MeterReadingComponent implements OnInit {
   time: any = ""
   date: any = ""
 
-  userData: any = []
-  isadmin: boolean = false
-
-  meterPermission: boolean = false
-
-  readingForm = new FormGroup({
+  meterAdd = new FormGroup({
     mName: new FormControl("", [Validators.required]),
     mDate: new FormControl("",),
     mTime: new FormControl("",)
@@ -32,26 +27,9 @@ export class MeterReadingComponent implements OnInit {
   }
 
 
-  constructor(private route: Router, private logRegSer: LoginRegisterService, private dataservice: DataService, private router:Router) { }
+  constructor(private route: Router, private logRegSer: LoginRegisterService, private dataservice: DataService ,private router:Router) { }
 
   ngOnInit(): void {
-    this.getUserData()
-  }
-
-
-  getUserData() {
-    this.dataservice.getUserData().subscribe(d => {
-      this.userData = d
-      this.isadmin = d.isAdmin
-      let val1 = d.role_coll.filter((v: any) => {
-        v.module_name == "meter"
-      })
-      if (val1.length == 1) {
-        this.meterPermission = true
-      } else {
-        this.meterPermission = false
-      }
-    })
   }
 
 
@@ -60,7 +38,7 @@ export class MeterReadingComponent implements OnInit {
     this.date = new Date().toISOString().split('T')[0]
     console.log(this.date);
 
-    this.readingForm.controls.mDate.setValue(this.date)
+    this.meterAdd.controls.mDate.setValue(this.date)
 
 
     this.time = ""
@@ -79,15 +57,18 @@ export class MeterReadingComponent implements OnInit {
 
     console.log(convertTime(this.time));
 
-    this.readingForm.controls.mTime.setValue(convertTime(this.time))
-    console.log(this.readingForm.value);
-    this.readingForm.reset
+    this.meterAdd.controls.mTime.setValue(convertTime(this.time))
+    console.log(this.meterAdd.value);
+    this.meterAdd.reset
 
 
 
 
   }
 
+  goto() {
+    this.route.navigate(["/meter-table"])
+  }
 
 
   sendData() {
@@ -96,7 +77,7 @@ export class MeterReadingComponent implements OnInit {
     this.date = new Date().toISOString().split('T')[0]
     console.log(this.date);
 
-    this.readingForm.controls.mDate.setValue(this.date)
+    this.meterAdd.controls.mDate.setValue(this.date)
 
 
     this.time = ""
@@ -115,12 +96,11 @@ export class MeterReadingComponent implements OnInit {
 
     console.log(convertTime(this.time));
 
-    this.readingForm.controls.mTime.setValue(convertTime(this.time))
-    let val = this.readingForm.value
+    this.meterAdd.controls.mTime.setValue(convertTime(this.time))
+    let val = this.meterAdd.value
     this.logRegSer.postData(val).subscribe((data) => {
       console.log(data);
       this.dataservice.setData(data)
-    
       const Toast = Swal.mixin({
         toast: true,
         position: 'top',
@@ -137,6 +117,10 @@ export class MeterReadingComponent implements OnInit {
         icon: 'success',
         title: 'Meter added successfully'
       })
+      
+      setTimeout(()=>{
+        this.router.navigate(["/meter"])
+      },1500)
 
     }, (error) => {
       console.log("Err:" + error)
@@ -144,7 +128,7 @@ export class MeterReadingComponent implements OnInit {
         toast: true,
         position: 'top',
         showConfirmButton: false,
-        timer: 2000,
+        timer: 3000,
         timerProgressBar: true,
         didOpen: (toast) => {
           toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -157,11 +141,9 @@ export class MeterReadingComponent implements OnInit {
         title: error
       })
     })
-    
-    this.readingForm.reset
+
+    this.meterAdd.reset
 
   }
-
-
 
 }

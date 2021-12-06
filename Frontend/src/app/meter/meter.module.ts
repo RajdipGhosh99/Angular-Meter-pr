@@ -7,11 +7,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { DashboardComponent } from './dashboard/dashboard.component'
-import { AppRoutingModule } from '../app-routing.module';
 import { GraphComponent } from './graph/graph.component';
 import { Graph2Component } from './graph2/graph2.component';
 import { MeterHomeComponent } from './meter-home/meter-home.component';
 import { MeterRoutingModule } from './meter-routing.module';
+import { AddmeterComponent } from './addmeter/addmeter.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 
@@ -23,7 +25,8 @@ import { MeterRoutingModule } from './meter-routing.module';
     DashboardComponent,
     GraphComponent,
     Graph2Component,
-    MeterHomeComponent
+    MeterHomeComponent,
+    AddmeterComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +34,9 @@ import { MeterRoutingModule } from './meter-routing.module';
     ReactiveFormsModule,
     MatButtonModule,
     MatIconModule,
-    MeterRoutingModule
+    MeterRoutingModule,
+    MatCardModule,
+    MatTooltipModule
   ]
     
   

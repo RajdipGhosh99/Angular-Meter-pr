@@ -4,7 +4,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
-import { SigninComponent } from './signin/signin.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
@@ -15,6 +14,7 @@ import { AdminModule } from './admin/admin.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; 
 import { MeterModule } from './meter/meter.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RoleComponent } from './role/role/role.component';
 
 
 
@@ -24,12 +24,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   declarations: [
     AppComponent,
     SignupComponent,
-    SigninComponent,
     NavbarComponent,
     HomeComponent,
     AboutComponent,
     ContactComponent,
     RegisterComponent,
+    RoleComponent
     
     
   ],

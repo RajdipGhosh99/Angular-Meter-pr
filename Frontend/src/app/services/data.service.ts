@@ -11,6 +11,10 @@ export class DataService {
   private MeterName = ""
   private meterNameService=new BehaviorSubject(this.MeterName)
 
+  private isLogin=new BehaviorSubject(false)
+
+  private userFullData =new BehaviorSubject([])
+
   constructor() { }
 
   setData(data: any) {
@@ -35,6 +39,21 @@ export class DataService {
   }
   getMeterName(){
     return this.meterNameService
+  }
+
+  setLoginStatus(status:boolean){
+    this.isLogin.next(status)
+  }
+  getLoginStatus():Observable<any>{
+    return this.isLogin
+
+  }
+
+  setUserData(fulldata:any){
+    this.userFullData.next(fulldata)
+  }
+  getUserData():Observable<any>{
+    return this.userFullData
   }
  
 }

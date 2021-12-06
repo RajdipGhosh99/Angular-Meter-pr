@@ -1,0 +1,40 @@
+
+<div class=" main-div">
+    
+    <div class="form-div">
+        <mat-card>
+        <div>
+            <h1 class="headin">Signin Form</h1>
+        </div>
+        <form [formGroup]="signinForm" (ngSubmit)="loginFunc()">
+    
+            <div class="signin">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email address*</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        formControlName="email">
+                    <div *ngIf="signinForm.controls.email.touched">
+                        <label class="form-error" *ngIf="signinForm.controls.email.errors?.required">This field is
+                            required</label>
+                        <label class="form-error" *ngIf="signinForm.controls.email.errors?.email">Enter valid email.</label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password*</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password">
+                    <div *ngIf="signinForm.controls.password.touched">
+                        <label class="form-error" *ngIf="signinForm.controls.password.errors?.required">This field is
+                            required</label>
+                        <label class="form-error" *ngIf="signinForm.controls.password.errors?.email">Password must be 6
+                            digits
+                            long</label>
+                    </div>
+                </div>
+                <button type="submit" [disabled]="signinForm.invalid" class="btn btn-primary">Submit</button>
+            </div>
+    </form>
+    </mat-card>
+
+</div>
+
+</div>

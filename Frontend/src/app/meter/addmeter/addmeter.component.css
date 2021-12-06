@@ -1,0 +1,28 @@
+.meter{
+margin: 15rem;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.form-error{
+    color: red;
+}
+.main-div{
+    margin-top: 57px;
+}
+ mat-icon{
+    
+    color: rgb(136, 136, 136);
+    margin: 1rem;
+    cursor: pointer;
+    font-weight:bolder;
+    font-size: xx-large;
+}
+mat-icon:hover{
+    color: #000000;
+     font-size: xx-large;
+    
+}
+.card{
+    width: 50%;
+}

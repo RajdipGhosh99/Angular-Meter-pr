@@ -80,12 +80,6 @@ this.setmetername()
     })
 
 
-
-
-
-
-
-
   }
   ngOnChanges() {
 

@@ -1,0 +1,33 @@
+<div class="main-div">
+    <mat-icon routerLink='/meter' matTooltip="Back" >arrow_back</mat-icon>
+    <div class="meter">
+        <mat-card class="card">
+        <label for="Add Meter" style="text-align: center;font-weight: 700;color: brown;">Add Meter</label>
+        <form [formGroup]='meterAdd' (ngSubmit)="sendData()">
+                <div class="meter-input-root">
+        
+                    <div class="meter-input">
+                        <div class="meter-input-div">
+                            <div class="mb-3 every-field">
+                                <label for="exampleInputEmail1" class="form-label">Meter Name*</label>
+                                <input type="text"  class="form-control " id="exampleInputEmail1" aria-describedby="emailHelp"
+                                    formControlName="mName">
+                                <div *ngIf="meterAdd.controls.mName.touched">
+                                    <label class="form-error" *ngIf="meterAdd.controls.mName.errors?.required">Can't be empty</label>
+                                </div>
+                            </div>
+        
+                        </div>
+        
+                    </div>
+                </div>
+        
+                <div class="mt-3">
+                    <button type="submit" class="btn btn-warning" data-bs-dismiss="modal" [disabled]='meterAdd.invalid'>Add
+                        Meter</button>
+                </div>
+            
+        </form>
+        </mat-card>
+    </div>
+</div>
