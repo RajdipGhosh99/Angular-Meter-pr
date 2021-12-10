@@ -2,14 +2,14 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <a class="navbar-brand" href="#"> <strong>User :</strong> {{fullUserData.user_name }} </a>
-            <a style="color: red;" *ngIf="fullUserData.isAdmin==true" >(super admin)</a>
-            <a style="color: red;" *ngIf="fullUserData.isAdmin==false" >(user)</a>
+            <a style="color: red;" *ngIf="fullUserData.isAdmin==true">(super admin)</a>
+            <a style="color: red;" *ngIf="fullUserData.isAdmin==false">(user)</a>
         </a>
 
         <div>
             <div class=" ms-auto mb-2 mb-lg-0">
-                <a class="btn btn-warning " aria-current="page" data-bs-toggle="modal"
-                    data-bs-target="#exampleModal" >Add Role</a>
+                <a class="btn btn-warning " aria-current="page" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    (click)="addRoleButton()">Add Role</a>
 
             </div>
 
@@ -18,48 +18,54 @@
 </nav>
 
 
-<div class="tableM" style="margin: 3rem; align-items: center;" >
-    
-        <table class="table  ">
+<div class="tableM" style="margin: 3rem; align-items: center;">
 
-            <thead>
-                <tr class="text-center">
-                    <th scope="col">#</th>
-                    <th scope="col">Role name</th>
-                    <th scope="col">Module name</th>
-                    <th scope="col">Created by</th>
-                    <th scope="col">Created Date</th>
-                   
-                    <th scope="col">Action</th>
+    <table class="table  ">
 
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="text-center" *ngFor="let role of allroleData;index as i">
-                    <!-- <th scope="row">1</th> -->
-                    <td>{{i+1}}</td>
-                    <td>{{role.role_name}}</td>
-                    <td>{{role.module_name | json}}</td>
-                    <td>{{role.created_by}}</td>
-                    <td>{{role.created_date}}</td>
+        <thead>
+            <tr class="text-center">
+                <th scope="col">#</th>
+                <th scope="col">Role name</th>
+                <th scope="col">Module name</th>
+                <th scope="col">Created by</th>
+                <th scope="col">Created Date</th>
 
-                    <td>
-                        <button style="margin-right:.5rem;" type="button" class="btn btn-light" data-bs-toggle="modal"
-                            data-bs-target="#exampleModalValue" (click)="editButtonClick(role)" >Edit</button>
-                        <button type="button" class="btn btn-danger" style="margin-right:.5rem;" (click)= "deleteRole(role._id)">Delete</button>
-                    </td>
+                <th scope="col">Action</th>
 
-                </tr>
-                <div>
-                    <p style="color: red;text-align:center; margin: 2rem;font-size:x-large; " *ngIf="allroleData.length==0">No data found</p>
-                </div>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="text-center" *ngFor="let role of allroleData;index as i">
+                <!-- <th scope="row">1</th> -->
+                <td>{{i+1}}</td>
+                <td>{{role.role_name}}</td>
+                <td>{{role.module_name | json}}</td>
+                <td>{{role.created_by}}</td>
+                <td>{{role.created_date}}</td>
+
+                <td>
+                    <button style="margin-right:.5rem;" type="button" class="btn btn-light" data-bs-toggle="modal"
+                        data-bs-target="#exampleModalValue" (click)="editButtonClick(role)">Edit</button>
+                    <button type="button" class="btn btn-danger" style="margin-right:.5rem;"
+                        (click)="deleteRole(role._id, 'delete')">Delete</button>
+
+                    <mat-slide-toggle class="example-margin ml-4 "  [checked]="checked[i]" (change)="toggle(role._id,i)" ></mat-slide-toggle>
 
 
-            </tbody>
+                </td>
 
-        </table>
+            </tr>
+            <div>
+                <p style="color: red;text-align:center; margin: 2rem;font-size:x-large; " *ngIf="allroleData.length==0">
+                    No data found</p>
+            </div>
 
-   
+
+        </tbody>
+
+    </table>
+
+
 
 </div>
 
@@ -127,54 +133,54 @@
 <div class="modal fade" id="exampleModalValue" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-        <form [formGroup]='roleFrom' (ngSubmit)='updateRole()'>
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Role</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="meter-input-div">
-                    <div class="mb-3 every-field">
-                        <label class="form-label">Role Name*</label>
-                        <input type="text" class="form-control" formControlName="role_name">
-                    </div>
-        
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" formControlName="checkbox1">
-                        <label class="form-check-label">
-                            Meter
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value=" " formControlName="checkbox2">
-                        <label class="form-check-label">
-                            Dashboard
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" formControlName="checkbox3">
-                        <label class="form-check-label">
-                            User
-                        </label>
-                    </div>
-        
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" formControlName="checkbox4">
-                        <label class="form-check-label">
-                            Role
-                        </label>
-                    </div>
-        
-        
+            <form [formGroup]='roleFrom' (ngSubmit)='updateRole()'>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Role</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-            </div>
-        
-        
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Edit Role</button>
-            </div>
-        </form>
+                <div class="modal-body">
+                    <div class="meter-input-div">
+                        <div class="mb-3 every-field">
+                            <label class="form-label">Role Name*</label>
+                            <input type="text" class="form-control" formControlName="role_name">
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" formControlName="checkbox1">
+                            <label class="form-check-label">
+                                Meter
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value=" " formControlName="checkbox2">
+                            <label class="form-check-label">
+                                Dashboard
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" formControlName="checkbox3">
+                            <label class="form-check-label">
+                                User
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" formControlName="checkbox4">
+                            <label class="form-check-label">
+                                Role
+                            </label>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Edit Role</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

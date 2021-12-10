@@ -12,6 +12,7 @@ router.post("/add", async (req, res) => {
 
     try {
         if (!mName || !mDate || !mTime) {
+            
             res.status(400).json("Enter fields properly")
 
         } else {
@@ -19,6 +20,7 @@ router.post("/add", async (req, res) => {
             const userInput = meterModel(req.body)
             const dbResponse = await userInput.save()
             if (dbResponse) {
+                
                 res.status(201).json(dbResponse)
                 console.log(dbResponse);
             } else {
@@ -27,6 +29,7 @@ router.post("/add", async (req, res) => {
         }
 
     } catch (error) {
+       
         res.status(400).json("Err:" + error)
     }
 })
@@ -36,12 +39,14 @@ router.get("/viewall", async (req, res) => {
     try {
         const dbResponse = await meterModel.find()
         if (dbResponse) {
+           
             res.status(200).json(dbResponse)
         } else {
             res.status(400).json("No data found ")
         }
 
     } catch (error) {
+       
         res.status(400).json("Something Error :" + error)
     }
 

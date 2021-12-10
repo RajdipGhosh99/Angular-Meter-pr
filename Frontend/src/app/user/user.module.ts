@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
     CommonModule,
     UserRoutingModule,
     ReactiveFormsModule,
-    MatCardModule
+    MatCardModule,
+    MatSlideToggleModule
   ]
 })
 export class UserModule { }

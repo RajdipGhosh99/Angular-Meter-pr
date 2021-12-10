@@ -15,15 +15,20 @@ export class RoleService {
     return this.http.post(apiUrl, data).pipe(catchError(this.handelError))
   }
 
+  all_active_inactive(){
+    let apiUrl = `http://localhost:9000/role/active-inactive-role`
+    return this.http.get(apiUrl).pipe(catchError(this.handelError))
+  }
+
 
   allRole() {
     let apiUrl = `http://localhost:9000/role/all`
     return this.http.get(apiUrl).pipe(catchError(this.handelError))
   }
 
-  deleteRole(oId: any) {
-    let apiUrl = `http://localhost:9000/role/delete/${oId}`
-    return this.http.delete(apiUrl).pipe(catchError(this.handelError))
+  changeRoleStatus(oId: any,data:any) {
+    let apiUrl = `http://localhost:9000/role/update-role-status/${oId}`
+    return this.http.put(apiUrl,data).pipe(catchError(this.handelError))
   }
 
   UpdateRole(data: any, oId: any) {

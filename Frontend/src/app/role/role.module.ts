@@ -11,9 +11,9 @@ import { MatCardModule } from '@angular/material/card';
   ],
   imports: [
     CommonModule,
-    MatCardModule
+    MatCardModule,
   ],
-  exports:[
+  exports: [
     RoleModule
   ]
 })

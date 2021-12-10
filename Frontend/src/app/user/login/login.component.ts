@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import { UserdataService } from 'src/app/services/userdata.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -27,12 +28,42 @@ export class LoginComponent implements OnInit {
       this.dataService.setLoginStatus(true)
       this.dataService.setUserData(d)
       this.router.navigateByUrl('/')
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 1000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+
+      Toast.fire({
+        icon: 'success',
+        title: 'Login successfully'
+      })
     },error=>{
       console.log("err"+error);
-      alert(error)
-      
-      
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+
+      Toast.fire({
+        icon: 'error',
+        title: error
+      })
     })
+
    
   }
 

@@ -9,7 +9,7 @@
         <div>
             <div class=" ms-auto mb-2 mb-lg-0">
                 <a class="btn btn-warning " aria-current="page" href="" data-bs-toggle="modal"
-                    data-bs-target="#exampleModalValue"  (click)="getAllRoles()">Add User</a>
+                    data-bs-target="#exampleModalValue" (click)="getAllRoles()">Add User</a>
 
             </div>
 
@@ -18,7 +18,7 @@
 </nav>
 
 
-<div class="tableM" style="margin: 3rem; align-items: center;" >
+<div class="tableM" style="margin: 3rem; align-items: center;">
     <mat-card>
         <table class="table  ">
 
@@ -44,7 +44,7 @@
                     <td>
                         <ng-container *ngFor="let module of user.role_coll_id">
                             <span>{{module.role_name}}</span>
-                    
+
                         </ng-container>
                     </td>
                     <td>{{user.created_date}}</td>
@@ -54,6 +54,8 @@
                             data-bs-target="#exampleModal" (click)="getUserId(user)">Edit</button>
                         <button type="button" class="btn btn-danger" style="margin-right:.5rem;"
                             (click)=' deleteUser(user._id)'>Delete</button>
+                        <mat-slide-toggle class="example-margin ml-4 " [checked]="checked[i]"
+                            (change)="toggle(user._id,i)"></mat-slide-toggle>
 
 
                     </td>
@@ -112,7 +114,7 @@
                                     empty</label>
                             </div>
                         </div>
-            
+
                         <div class="mb-3 every-field">
                             <label for="exampleInputEmail1" class="form-label">Email*</label>
                             <input type="email" class="form-control" formControlName="email">
@@ -122,7 +124,7 @@
                                     empty</label>
                             </div>
                         </div>
-            
+
                         <div class="mb-3 every-field">
                             <label class="form-label">Temporary Password*</label>
                             <input type="text" class="form-control" formControlName="password">
@@ -132,20 +134,20 @@
                                     empty</label>
                             </div>
                         </div>
-            
-            
+
+
                         <div class="mb-3 every-field">
                             <label class="form-label">Select Role* :</label>
                             <select formControlName="role_coll_id" class="form-control">
                                 <option value="{{opt._id}}" *ngFor="let opt of roleOptions">{{opt.role_name}}</option>
                             </select>
-            
+
                         </div>
-            
+
                     </div>
                 </div>
-            
-            
+
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Edit User</button>
@@ -199,8 +201,8 @@
 
                         <div class="mb-3 every-field">
                             <label class="form-label">Select Role* :</label>
-                            <select  formControlName="role_coll_id" class="form-control">
-                                <option value="{{opt._id}}" *ngFor="let opt of roleOptions" >{{opt.role_name}}</option>
+                            <select formControlName="role_coll_id" class="form-control">
+                                <option value="{{opt._id}}" *ngFor="let opt of roleOptions">{{opt.role_name}}</option>
                             </select>
 
                         </div>

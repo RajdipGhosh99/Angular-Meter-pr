@@ -1,5 +1,7 @@
 const mongoose = require("mongoose")
-const Schema = mongoose.Schema
+const mongooseHistory = require('mongoose-history')
+const Schema =mongoose.Schema
+
 
 
 
@@ -10,8 +12,7 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        trim: true,
-        unique: true
+        trim: true
     },
     password: {
         type: String,
@@ -31,9 +32,16 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "admin",
         trim: true
+    },
+    status:{
+        type:String,
+        trim:true,
+        default:"inactive"
     }
 
 })
+
+userSchema.plugin(mongooseHistory)
 
 const userModel = mongoose.model("user", userSchema)
 

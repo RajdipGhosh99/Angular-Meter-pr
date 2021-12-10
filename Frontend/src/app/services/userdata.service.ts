@@ -16,7 +16,7 @@ export class UserdataService {
     return this.http.post(apiUrl,data).pipe(catchError(this.handelError))
   }
   allUser(){
-    let apiUrl =`http://localhost:9000/user/all`
+    let apiUrl =`http://localhost:9000/user/active-inactive-users`
     return this.http.get(apiUrl).pipe(catchError(this.handelError))
   }
 
@@ -46,6 +46,11 @@ export class UserdataService {
     const apiUrl =`http://localhost:9000/user/find-by-id/${oId}`
     return this.http.get(apiUrl).pipe(catchError(this.handelError))
 
+  }
+
+  updateStatus(oId:any,data:any){
+    const apiUrl =`http://localhost:9000/user/update-status/${oId}`
+    return this.http.put(apiUrl, data).pipe(catchError(this.handelError))
   }
 
 
