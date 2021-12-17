@@ -31,6 +31,9 @@ const routes: Routes = [
   },
   {
     path:"user",loadChildren:()=>(import("./user/user.module")).then(m=>m.UserModule)
+  },
+  {
+    path:"dashboard",loadChildren:()=>(import("./app-dashboard/app-dashboard.module")).then(m=>m.AppDashboardModule)
   }
   
 ];
