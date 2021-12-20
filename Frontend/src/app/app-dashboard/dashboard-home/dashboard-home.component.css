@@ -1,0 +1,19 @@
+.main-div{
+    padding-top: 3.5rem;
+    background: rgb(255, 246, 246);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+mat-card{
+    margin: 3rem ;
+    resize: both;
+  overflow:auto;
+}
+.left{
+    justify-content: start;
+    width: 50%;
+}
+.right{
+    justify-content: flex-end;
+}

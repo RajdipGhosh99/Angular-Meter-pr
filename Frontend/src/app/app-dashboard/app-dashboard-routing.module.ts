@@ -6,7 +6,8 @@ const routes: Routes = [
   {
     path:"home",
     component:DashboardHomeComponent
-  }
+  },
+ 
 ];
 
 @NgModule({
