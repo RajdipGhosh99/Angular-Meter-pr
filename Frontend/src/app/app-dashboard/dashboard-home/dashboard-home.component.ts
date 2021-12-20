@@ -12,18 +12,15 @@ import { AppDashboardService } from 'src/app/services/app-dashboard.service';
 export class DashboardHomeComponent implements OnInit {
   allMeters: any = []
 
-
   constructor(private appDashService: AppDashboardService) {
     this.getAllMeterData()
-
   }
 
-  ngOnInit(): void {}
-  
+ 
 
+  ngOnInit() { }
 
   getAllMeterData() {
-
 
     this.appDashService.allMeterData().subscribe(d => {
       this.allMeters = d

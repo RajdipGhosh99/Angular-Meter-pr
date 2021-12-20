@@ -17,6 +17,8 @@ export class GraphComponent implements OnInit {
   @Input() meterId: any
   @Input() index: any
 
+  progressBarVar:any
+
 
   data: any = []
   root: any = []
@@ -35,6 +37,16 @@ export class GraphComponent implements OnInit {
 
 
   ngAfterViewInit() {
+    function SortData(params: any) {
+      let data = params.filter(v => v.rUnit == "KWH")
+      if (data.length >= 24) {
+        let data2 = data.slice(0, 23)
+        return data2
+
+      }else{
+        return data
+      }
+    }
 
     // Chart code goes in here
 
@@ -50,7 +62,8 @@ export class GraphComponent implements OnInit {
     );
 
     // Define data
-    this.data[this.index] = [...this.meterReading];
+    this.data[this.index] = [...SortData(this.meterReading)]
+    this.progressBarVar = this.data[this.index]
     console.log(this.data[this.index])
 
     // Create Y-axis
