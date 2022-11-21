@@ -1,3 +1,26 @@
-<p style="padding: 5rem;" > dashboard-home works!</p>
-<div id="chartdiv" style="width: 100%; height: 100%"></div>
+<div class="d-flex justify-content-center" style="width: 100vw; height: 100vh;" *ngIf="allMeters.length==0">
+    <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
 
+<div class="main-div " >
+    <mat-card class="shadow" *ngFor="let meter of allMeters; index as i" >
+
+        <div class="inside_main">
+            <div>
+                <header class="left">Meter Name:<strong>{{meter.mName}}</strong></header>
+                <ul>
+                    <li>  Created Date: {{meter.mDate}}</li>
+                    <li>Created Time: {{meter.mTime}}</li>
+                </ul>
+            </div>
+
+            <div class="right" style="padding: 1rem;">
+              <app-graph [meterReading]="meter.mReading" [meterId]="meter._id" [index]="i"></app-graph>
+            </div>
+
+        </div>
+    </mat-card>
+</div>
+ 
