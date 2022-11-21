@@ -170,16 +170,25 @@ router.post("/search-by-unit/:pId", async (req, res) => {
 });
 
 
-//meter aggregation
-router.get("/get-24/:id", async (req, res) => {
-const _id =req.params.id
+//meter last24 KWH data
+router.get("/last24/:pId", async (req, res) => {
+    const _id = req.params.pId
     try {
-        const dbResponse= await meterModel.aggregate()
-       res.status(200).json(dbResponse)
+       
+            const dbResponse = await meterModel.findOne({ _id })
+
+            let sortData = dbResponse.mReading.filter(v => v.rUnit == "KWH")
+            let last24Data= sortData.slice( 0,24)
+
+
+            res.status(200).json(last24Data)
+      
+
+
     } catch (error) {
-     res.status(400).json(error)
+        res.status(400).json("Somehing Error:" + error)
     }
-})
+});
 
 
 
